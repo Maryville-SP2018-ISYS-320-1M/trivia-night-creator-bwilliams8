@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class BuildTriviaNightPresentation {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		String fileName = "//Users//joedent//TriviaNight.pptx";
+		String fileName = "E:\\Users\\Brian\\Documents\\GitHub\\trivia-night-creator-bwilliams8\\TriviaNight.pptx";
 		SlideShowBuilder builder = new SlideShowBuilder();
 		QuestionsManager qm = new QuestionsManager("data");
 		
