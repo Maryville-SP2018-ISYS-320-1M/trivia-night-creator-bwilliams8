@@ -14,6 +14,25 @@ public class BuildTriviaNightPresentation {
 		
 		Boolean gameType = null;
 		Scanner console = new Scanner(System.in);
+		
+		String[] categories = qm.getCategories();
+		String[] questions = qm.getQuestions();
+		String[] answers = qm.getAnswers();
+		
+		if (categories.length != 10) {
+			System.out.println("Please ensure that there are exactly ten categories.");
+			System.exit(-1);
+		}
+		
+		if (questions.length != 100) {
+			System.out.println("Please ensure that each category has exactly ten questions.");
+			System.exit(-1);
+		}
+		
+		if (answers.length != 100) {
+			System.out.println("Please ensure that each question has an answer.");
+			System.exit(-1);
+		}
 
 		while (gameType == null) {
 		System.out.println("Would you like your trivia game to be Category Set or Round Number?");
