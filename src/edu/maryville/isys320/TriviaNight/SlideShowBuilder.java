@@ -45,19 +45,28 @@ public class SlideShowBuilder {
 	    }
 	}
 
-	public void buildSlideShow(String[] categories, String[] questions, String[] answers, String fileName) {
+	public void buildSlideShow(String[] categories, String[] questions, String[] answers, String fileName, Boolean gameType) {
 		XMLSlideShow ppt = new XMLSlideShow();
 		XSLFSlideMaster defaultMaster = ppt.getSlideMasters().get(0);
 		
+		if(gameType == true) {		
 		for (int i = 0; i < 10; i++) {
 			makeRoundSlide(ppt, defaultMaster, "Round " + (i+1));
 			for (int j = 0; j < 10; j++) {
-				makeSlide(ppt, defaultMaster, categories[i], questions[i * 10 + j]/*, answers[i * 10 + j]*/);
+				makeSlide(ppt, defaultMaster, categories[i], questions[i * 10 + j]); //For category set, each question per round is from the same category
 			}
 			
 			makeAnswerSlide(ppt, defaultMaster, answers);
-
-
+			}
+		} else if(gameType == false) {
+			for (int i = 0; i < 10; i++) {
+				makeRoundSlide(ppt, defaultMaster, "Round " + (i+1));
+				for (int j = 0; j < 10; j++) {
+					makeSlide(ppt, defaultMaster, categories[j], questions[i * 10 + j]); //For Round Number, each question per round is from a different category.
+				}
+				
+				makeAnswerSlide(ppt, defaultMaster, answers);
+				}
 		}
 		
 	    savePPTX(ppt, fileName);
