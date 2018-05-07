@@ -18,6 +18,8 @@ import org.apache.poi.xslf.usermodel.XSLFTextShape;
 
 public class SlideShowBuilder {
 	
+	int j = 0;
+	
 	public void printSlideShowInfo(String fileName) throws FileNotFoundException, IOException {
 		XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(fileName));
 		// get slides
@@ -50,8 +52,12 @@ public class SlideShowBuilder {
 		for (int i = 0; i < 10; i++) {
 			makeRoundSlide(ppt, defaultMaster, "Round " + (i+1));
 			for (int j = 0; j < 10; j++) {
-				makeSlide(ppt, defaultMaster, categories[i], questions[i * 10 + j], answers[i * 10 + j]);
+				makeSlide(ppt, defaultMaster, categories[i], questions[i * 10 + j]/*, answers[i * 10 + j]*/);
 			}
+			
+			makeAnswerSlide(ppt, defaultMaster, answers);
+
+
 		}
 		
 	    savePPTX(ppt, fileName);
@@ -68,7 +74,7 @@ public class SlideShowBuilder {
 
 	}
 
-	private static void makeSlide(XMLSlideShow ppt, XSLFSlideMaster master, String title, String question, String answer) {
+	private static void makeSlide(XMLSlideShow ppt, XSLFSlideMaster master, String title, String question/*, String answer*/) {
 		XSLFSlideLayout blankSlide = master.getLayout(SlideLayout.BLANK);
 		XSLFSlide slide = ppt.createSlide(blankSlide);
 
@@ -82,11 +88,35 @@ public class SlideShowBuilder {
 		question1.setText(question).setFontSize(44.0);
 		question1.setHorizontalCentered(true);
 
-		XSLFTextShape answer1 = slide.createTextBox();
+/*		XSLFTextShape answer1 = slide.createTextBox();
 		answer1.setAnchor(new Rectangle2D.Double(16.988740, 366.810787, 685.011260, 74.918976));
 		answer1.setText(answer).setFontSize(36.0d);
 		answer1.setHorizontalCentered(true);
+*/
 }
+	private void makeAnswerSlide(XMLSlideShow ppt, XSLFSlideMaster master, String answer[]) {
+		XSLFSlideLayout blankSlide = master.getLayout(SlideLayout.BLANK);
+		XSLFSlide slide = ppt.createSlide(blankSlide);
+		if (j == 0) {		
+		for (int i = 0; i < 10; i++) {			
+		XSLFTextShape answer1 = slide.createTextBox();
+		answer1.setAnchor(new Rectangle2D.Double(16.988740, (i * 50), 685.011260, 74.918976));
+		answer1.setText(answer[i]).setFontSize(36.0d);
+		answer1.setHorizontalCentered(true);
+		}
+		j++;
+		} else if (j >= 0 && j <= 9) {
+			for (int i = 0; i < 10; i++) {			
+				XSLFTextShape answer1 = slide.createTextBox();
+				answer1.setAnchor(new Rectangle2D.Double(16.988740, (i * 50), 685.011260, 74.918976));
+				answer1.setText(answer[(10 * j) + i]).setFontSize(36.0d);
+				answer1.setHorizontalCentered(true);
+				}
+				j++;
+		} 
+		
+
+	}
 
 	private void savePPTX(XMLSlideShow ppt, String filePath) {
 		File file = new File(filePath);

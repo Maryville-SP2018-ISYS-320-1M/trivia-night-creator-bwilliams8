@@ -47,6 +47,8 @@ public class QuestionsManager {
 	}
 	
 	public String[] getAnswers() {
+		//	System.out.println(Arrays.toString(answers.toArray()));
+
 		return answers.toArray(new String[answers.size()]);
 	}
 
