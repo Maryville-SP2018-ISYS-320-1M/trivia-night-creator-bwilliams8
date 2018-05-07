@@ -89,7 +89,7 @@ public class SlideShowBuilder {
 
 		XSLFTextShape header = slide.createTextBox();
 		header.setAnchor(new Rectangle2D.Double(16.988740, 17.797717, 685.011260, 50.892205));
-		header.setText(title).setFontSize(36.0d);
+		header.setText("Category: " + title).setFontSize(36.0d);
 		header.setHorizontalCentered(true);
 
 		XSLFTextShape question1 = slide.createTextBox();

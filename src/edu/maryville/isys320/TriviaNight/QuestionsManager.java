@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
 
+import org.apache.commons.collections4.list.LazyList;
+
 public class QuestionsManager {
 	public ArrayList<String> categories = new ArrayList<String>();
 	public ArrayList<String> questions = new ArrayList<String>();;
@@ -39,6 +41,17 @@ public class QuestionsManager {
 	}
 	
 	public String[] getCategories() {
+		int size = categories.size();
+		String truncateString;
+/*		for(int i = 1; i < size; i++) {
+			truncateString = categories.get(i);
+			categories.remove(i);
+			truncateString.substring(0, truncateString.lastIndexOf('.'));
+			categories.add(truncateString);
+		}*/
+/*		for(int i = 0; i < categories.size(); i++) {
+		categories[i].replaceAll(".txt", "");
+		} */
 		return categories.toArray(new String[categories.size()]);
 	}
 	
